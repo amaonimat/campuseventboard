@@ -1,4 +1,4 @@
-import EventCard from "./components/EventCard";
+import EventDiscovery from "./components/EventDiscovery";
 import events from "./data";
 
 export default function Home() {
@@ -23,9 +23,7 @@ export default function Home() {
             </div>
             <span className="text-sm text-muted">{events.length} events</span>
           </div>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {events.map((event) => <EventCard key={event.id} event={event} />)}
-          </div>
+          <EventDiscovery events={events} />
         </section>
       </div>
     </main>
