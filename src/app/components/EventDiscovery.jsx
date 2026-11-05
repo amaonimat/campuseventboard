@@ -3,10 +3,17 @@
 import { useState } from "react";
 import EventCard from "./EventCard";
 
+const categories = ["All", "Tech", "Sports", "Faith", "Social"];
+
 export default function EventDiscovery({ events }) {
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState("All");
   const searchTerm = query.trim().toLowerCase();
-  const visibleEvents = events.filter((event) => event.title.toLowerCase().includes(searchTerm));
+  const visibleEvents = events.filter(
+    (event) =>
+      (category === "All" || event.category === category) &&
+      event.title.toLowerCase().includes(searchTerm)
+  );
 
   return (
     <>
@@ -20,6 +27,27 @@ export default function EventDiscovery({ events }) {
           placeholder="Search events by title"
           className="min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-ink shadow-sm placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
         />
+      </div>
+
+      <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter events by category">
+        {categories.map((item) => {
+          const selected = category === item;
+          return (
+            <button
+              key={item}
+              type="button"
+              aria-pressed={selected}
+              onClick={() => setCategory(item)}
+              className={`min-h-10 rounded-full px-4 text-sm font-semibold transition-colors ${
+                selected
+                  ? "bg-accent text-white"
+                  : "border border-line bg-surface text-muted hover:border-accent hover:text-accent"
+              }`}
+            >
+              {item}
+            </button>
+          );
+        })}
       </div>
 
       <p className="mb-4 text-sm text-muted" aria-live="polite">
