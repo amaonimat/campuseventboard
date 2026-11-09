@@ -8,12 +8,17 @@ const categories = ["All", "Tech", "Sports", "Faith", "Social"];
 export default function EventDiscovery({ events }) {
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState("All");
+  const [sortOrder, setSortOrder] = useState("soonest");
   const searchTerm = query.trim().toLowerCase();
-  const visibleEvents = events.filter(
-    (event) =>
-      (category === "All" || event.category === category) &&
-      event.title.toLowerCase().includes(searchTerm)
-  );
+  const visibleEvents = events
+    .filter(
+      (event) =>
+        (category === "All" || event.category === category) &&
+        event.title.toLowerCase().includes(searchTerm)
+    )
+    .sort((first, second) =>
+      first.date.localeCompare(second.date) * (sortOrder === "soonest" ? 1 : -1)
+    );
 
   return (
     <>
@@ -50,9 +55,22 @@ export default function EventDiscovery({ events }) {
         })}
       </div>
 
-      <p className="mb-4 text-sm text-muted" aria-live="polite">
-        Showing {visibleEvents.length} of {events.length} events
-      </p>
+      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-muted" aria-live="polite">
+          Showing {visibleEvents.length} of {events.length} events
+        </p>
+        <label className="flex items-center gap-2 text-sm font-medium text-muted">
+          <span>Sort by date</span>
+          <select
+            value={sortOrder}
+            onChange={(event) => setSortOrder(event.target.value)}
+            className="min-h-10 rounded-lg border border-line bg-surface px-3 text-ink"
+          >
+            <option value="soonest">Soonest first</option>
+            <option value="latest">Latest first</option>
+          </select>
+        </label>
+      </div>
 
       {visibleEvents.length > 0 ? (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
