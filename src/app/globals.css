@@ -1,19 +1,19 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f5f7f6;
-  --foreground: #17231d;
+  --background: #f4f7fb;
+  --foreground: #172033;
 }
 
 @theme {
-  --color-paper: #f5f7f6;
+  --color-paper: #f4f7fb;
   --color-surface: #ffffff;
-  --color-ink: #17231d;
-  --color-muted: #68756d;
-  --color-line: #e1e8e3;
-  --color-tint: #edf4ef;
-  --color-accent: #176b4d;
-  --color-accent-hover: #10563d;
+  --color-ink: #172033;
+  --color-muted: #647084;
+  --color-line: #dce4ef;
+  --color-tint: #eaf1fb;
+  --color-accent: #2457c5;
+  --color-accent-hover: #1b439b;
 }
 
 @theme inline {
@@ -48,6 +48,6 @@ select {
 }
 
 :focus-visible {
-  outline: 2px solid #176b4d;
+  outline: 2px solid var(--color-accent);
   outline-offset: 3px;
 }
