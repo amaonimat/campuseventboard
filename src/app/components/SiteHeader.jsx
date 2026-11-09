@@ -2,13 +2,13 @@ import Link from "next/link";
 
 export default function SiteHeader() {
   return (
-    <header className="border-b border-line bg-white/90">
+    <header className="sticky top-0 z-30 border-b border-line/80 bg-white/90 shadow-sm backdrop-blur-xl">
       <nav
         aria-label="Main navigation"
         className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-4 sm:px-8"
       >
         <Link href="/" className="flex items-center gap-2.5 text-lg font-bold tracking-tight text-ink">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-accent text-sm text-white">C</span>
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-blue-700 to-indigo-600 text-sm text-white shadow-md shadow-blue-900/20">C</span>
           Campus<span className="text-accent">Board</span>
         </Link>
         <div className="flex items-center gap-2">

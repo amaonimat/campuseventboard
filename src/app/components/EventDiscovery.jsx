@@ -22,19 +22,24 @@ export default function EventDiscovery({ events }) {
 
   return (
     <>
-      <label htmlFor="event-search" className="sr-only">Search events by title</label>
-      <div className="mb-6 max-w-xl">
-        <input
-          id="event-search"
-          type="search"
-          value={query}
-          onChange={(event) => setQuery(event.target.value)}
-          placeholder="Search events by title"
-          className="min-h-12 w-full rounded-xl border border-line bg-surface px-4 text-ink shadow-sm placeholder:text-muted focus:border-accent focus:outline-none focus:ring-2 focus:ring-accent/20"
-        />
-      </div>
+      <div className="mb-6 rounded-2xl border border-line/80 bg-white p-4 shadow-sm sm:p-5">
+        <label htmlFor="event-search" className="sr-only">Search events by title</label>
+        <div className="relative max-w-xl">
+          <svg viewBox="0 0 20 20" fill="none" aria-hidden="true" className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-muted">
+            <circle cx="8.75" cy="8.75" r="5.75" stroke="currentColor" strokeWidth="1.5" />
+            <path d="m13 13 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+          </svg>
+          <input
+            id="event-search"
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Search events by title"
+            className="min-h-12 w-full rounded-xl border border-line bg-paper pl-12 pr-4 text-ink placeholder:text-muted focus:border-accent focus:bg-white focus:outline-none focus:ring-2 focus:ring-accent/20"
+          />
+        </div>
 
-      <div className="mb-6 flex flex-wrap gap-2" role="group" aria-label="Filter events by category">
+        <div className="mt-4 flex flex-wrap gap-2" role="group" aria-label="Filter events by category">
         {categories.map((item) => {
           const selected = category === item;
           return (
@@ -43,16 +48,17 @@ export default function EventDiscovery({ events }) {
               type="button"
               aria-pressed={selected}
               onClick={() => setCategory(item)}
-              className={`min-h-10 rounded-full px-4 text-sm font-semibold transition-colors ${
+              className={`min-h-10 rounded-full px-4 text-sm font-semibold transition-all ${
                 selected
-                  ? "bg-accent text-white"
-                  : "border border-line bg-surface text-muted hover:border-accent hover:text-accent"
+                  ? "bg-accent text-white shadow-sm shadow-accent/20"
+                  : "border border-line bg-white text-muted hover:border-blue-300 hover:bg-tint hover:text-accent"
               }`}
             >
               {item}
             </button>
           );
         })}
+        </div>
       </div>
 
       <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -64,7 +70,7 @@ export default function EventDiscovery({ events }) {
           <select
             value={sortOrder}
             onChange={(event) => setSortOrder(event.target.value)}
-            className="min-h-10 rounded-lg border border-line bg-surface px-3 text-ink"
+            className="min-h-10 rounded-lg border border-line bg-white px-3 text-ink shadow-sm"
           >
             <option value="soonest">Soonest first</option>
             <option value="latest">Latest first</option>
